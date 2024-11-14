@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f391096-c461-4cc7-930c-1b8792faea71" name="Changes" comment="" />
+    <list default="true" id="6f391096-c461-4cc7-930c-1b8792faea71" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/ConnectController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/RegistrationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Connect.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Registration.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../E-K.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/../../E-K.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/utils/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Tervezesi_dokumentacio.docx" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +31,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -37,26 +57,41 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.ConnectController.executor": "Run",
     "Application.HelloApplication.executor": "Run",
+    "Application.MainApplication.executor": "Run",
+    "Application.Test.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/gelle/IdeaProjects/MySqlMusic",
+    "last_opened_file_path": "C:/Users/gelle/Desktop/Java_mySQL/mysql-connector-j-9.1.0/mysql-connector-j-9.1.0.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
+    "project.structure.last.edited": "Global Libraries",
+    "project.structure.proportion": "0.16015625",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gelle\Desktop\Adatb projekt\Database-project\TeamSportsDB\TeamSportsDB\src\main\resources\com\teamsportsdb" />
+      <recent name="C:\Users\gelle\Desktop\Adatb projekt\Database-project\TeamSportsDB\TeamSportsDB\src\main\resources" />
+      <recent name="C:\Users\gelle\Desktop\Adatb projekt\Database-project\TeamSportsDB\TeamSportsDB\src\main\java\com\teamsportsdb\ui" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.teamsportsdb" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -74,7 +109,11 @@
       <option name="presentableId" value="Default" />
       <updated>1731265043551</updated>
       <workItem from="1731265044592" duration="5176000" />
-      <workItem from="1731333377049" duration="7312000" />
+      <workItem from="1731333377049" duration="10053000" />
+      <workItem from="1731441588592" duration="5765000" />
+      <workItem from="1731481351032" duration="21516000" />
+      <workItem from="1731570571474" duration="2806000" />
+      <workItem from="1731598271796" duration="7158000" />
     </task>
     <servers />
   </component>
