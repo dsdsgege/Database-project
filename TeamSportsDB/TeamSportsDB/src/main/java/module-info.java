@@ -4,6 +4,7 @@ module com.teamsportsdb {
     requires java.desktop;
     requires java.sql;
     requires jdk.compiler;
+    requires mysql.connector.j;
 
 
     opens com.teamsportsdb to javafx.fxml;

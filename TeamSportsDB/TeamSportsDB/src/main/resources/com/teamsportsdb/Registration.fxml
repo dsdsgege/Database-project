@@ -5,13 +5,14 @@
 <?import javafx.scene.text.*?>
 
 <GridPane alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="com.teamsportsdb.ui.MainController">
-    <TextField fx:id="name" style="-fx-font-size: 15px;" promptText="Név:" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+          fx:controller="com.teamsportsdb.ui.RegistrationController">
+    <TextField fx:id="name" style="-fx-font-size: 15px;" promptText="Teljes név:"  GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <TextField fx:id="username" style="-fx-font-size: 15px;" promptText="Felhasználónév"  GridPane.columnIndex="0" GridPane.rowIndex="1" />
-    <PasswordField fx:id="password" style="-fx-font-size: 15px;" promptText=""  GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <PasswordField fx:id="password" style="-fx-font-size: 15px;" promptText="Jelszó"  GridPane.columnIndex="0" GridPane.rowIndex="2" />
     <Button fx:id="regButton" onAction="#onRegButtonAction" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px;
   -fx-background-radius: 5px; -fx-padding: 5 15;" text="Regisztráció"  GridPane.columnIndex="0" GridPane.rowIndex="3" />
-
+    <Label fx:id="errorMessage" text=" " style="-fx-text-fill: red; -fx-font-size: 14px; -fx-font-weight: bold;"  GridPane.columnIndex="0" GridPane.rowIndex="10"
+           visible="false" alignment="CENTER"/>
 
 
 </GridPane>

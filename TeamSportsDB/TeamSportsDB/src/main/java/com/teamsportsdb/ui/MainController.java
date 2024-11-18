@@ -1,6 +1,7 @@
 package com.teamsportsdb.ui;
 
 import com.teamsportsdb.utils.Database;
+import com.teamsportsdb.utils.SceneManager;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MainController implements Controller {
+public class MainController {
 
     @FXML
     private Label welcomeText;
@@ -29,17 +30,11 @@ public class MainController implements Controller {
     private Label errorMessage;
     @FXML
     private Button registration;
+    @FXML
+    private Button query;
 
-    private Stage stage;
 
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public Stage getStage() {
-        return stage;
-    }
 
     @FXML
     private void initialize() {
@@ -50,16 +45,19 @@ public class MainController implements Controller {
             username.setVisible(true);
             password.setVisible(true);
             loginButton.setVisible(true);
+            query.setVisible(true);
+            registration.setVisible(true);
         });
         disappear.play();
     }
 
     public void onLoginButtonAction() throws SQLException {
-            ResultSet resultSet;
+            ResultSet resultSet = null;
             try {
                 resultSet = Database.executeQuery("SELECT felhasznalonev, jelszo FROM felhasznalo");
-            } catch (SQLException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            } catch (RuntimeException e) {
+                errorMessage.setText(e.getMessage());
+                errorMessage.setVisible(true);
             }
 
             while(resultSet.next()) {
@@ -71,24 +69,26 @@ public class MainController implements Controller {
                         System.out.println("Successfully logged in");
                     }
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    errorMessage.setText(e.getMessage());
+                    errorMessage.setVisible(true);
                 }
             }
     }
 
-    public void onRegistrationAction() throws SQLException {
+    public void onRegistrationAction() {
         try {
-            //go to registration scene
+            //load registration scene
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/teamsportsdb/Registration.fxml"));
 
             //set newScene to that
-            Scene newScene = new Scene(fxmlLoader.load());
+            Scene regScene = new Scene(fxmlLoader.load(),1950,1040);
 
             //swap the scenes on stage
-            stage.setScene(newScene);
-            stage.show();
-        } catch (IOException e) {
+            SceneManager.getPrimaryStage().setScene(regScene);
+
+        } catch (Exception e) {
             errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
         }
     }
 }

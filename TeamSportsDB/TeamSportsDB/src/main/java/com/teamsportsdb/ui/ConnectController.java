@@ -2,6 +2,7 @@ package com.teamsportsdb.ui;
 
 import com.teamsportsdb.MainApplication;
 import com.teamsportsdb.utils.Database;
+import com.teamsportsdb.utils.SceneManager;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-public class ConnectController implements Controller{
+public class ConnectController{
 
     @FXML
     private Label errorMessage;
@@ -27,16 +28,7 @@ public class ConnectController implements Controller{
     @FXML
     private Button connectButton;
 
-    private Stage stage;
 
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public Stage getStage() {
-        return stage;
-    }
 
     public void onConnectButtonAction() {
             String user = username.getText();
@@ -50,18 +42,17 @@ public class ConnectController implements Controller{
                     //if successful, load the main page
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/teamsportsdb/Main.fxml"));
 
-                    Scene mainScene = new Scene(fxmlLoader.load(),1920,1080);
+                    Scene mainScene = new Scene(fxmlLoader.load(),1950,1040);
 
                     //we passed the stage so we can swap scenes
-                    stage.setScene(mainScene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    SceneManager.getPrimaryStage().setScene(mainScene);
+                } catch (Exception e) {
+                    errorMessage.setText(e.getMessage());
+                    errorMessage.setVisible(true);
                 }
 
             } catch (SQLException | ClassNotFoundException e) {
                 errorMessage.setText(e.getMessage());
-                System.out.println(e.getClass());
                 errorMessage.setVisible(true);
             }
     }
