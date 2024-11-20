@@ -5,6 +5,7 @@ module com.teamsportsdb {
     requires java.sql;
     requires jdk.compiler;
     requires mysql.connector.j;
+    requires org.hibernate.orm.core;
 
 
     opens com.teamsportsdb to javafx.fxml;

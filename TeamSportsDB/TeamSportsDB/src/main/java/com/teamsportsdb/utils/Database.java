@@ -2,10 +2,10 @@ package com.teamsportsdb.utils;
 
 
 
-import com.mysql.cj.protocol.Resultset;
-import javafx.scene.chart.PieChart;
+import org.hibernate.annotations.processing.SQL;
 
 import java.sql.*;
+import java.util.Arrays;
 
 
 public class Database {
@@ -58,31 +58,58 @@ public class Database {
 
     //Method to insert datas into given table and given columns
     //Returns false if there is already data with the same key
-
-    //EZT NEM ÍGY KELL
-//    public static boolean insertRecords(String table, String[] col, String[] val) throws RuntimeException {
-//        String columns = String.join(",", col);
-//        String values = String.join(",", val);
-//        String query = "INSERT INTO %s (%s) VALUES (%s)".formatted(table,columns,values);
-//        ResultSet resultset = null;
-//        try {
-//            resultset = executeQuery(query);
-//        } catch (RuntimeException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    public static void insertRecords(String table, String[] col, String[] val, String primaryKey) throws RuntimeException, SQLException {
+        //algorithm to check if there is duplication in the primary key column
+        int index = Arrays.binarySearch(col, primaryKey);
+        for (; index < val.length; index += col.length) {
+            if(isDuplicate(table,primaryKey,val[index])) {
+                throw new RuntimeException("Duplicate record found as Primary Key " + val[index]);
+            }
+        }
 
 
-    //Method to examine if the username is already in the database as it works as a Primary key in the table
-    public static boolean isUsernameTaken(String username) throws RuntimeException, SQLException {
+        String columns = String.join(",", col);
+        String placeholeders = "?";
+
+        //setting placeholders
+        for (int i = 0; i < col.length-1; i++) {
+            placeholeders = placeholeders + ", ?";
+        }
+        String query = "INSERT INTO %s (%s) VALUES (%s)".formatted(table,columns,placeholeders);
+
+        //execute query
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            for (int i = 0; i < val.length; i++) {
+                preparedStatement.setString(i + 1, val[i]);
+            }
+
+            //execute insertion
+            preparedStatement.executeUpdate();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+    //Method to examine if the record is already in use if it works as a Primary key in the table
+    public static boolean isDuplicate(String table, String primaryKey, String record) throws RuntimeException, SQLException {
         ResultSet resultSet = null;
 
         //getting the needed resultset
-        resultSet = executeQuery("SELECT felhasznalonev FROM felhasznalo");
+        try {
+            resultSet = executeQuery("SELECT %s FROM %s".formatted(primaryKey, table));
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
 
-        //Searching for the given username in the resultset, return true if found, otherwise false
+
+
+        //Searching for the given record in the resultset, return true if found, otherwise false
+        //so if found it's true, so PK already in the table
         String column = "felhasznalonev";
-        return isInResultSet(resultSet,column,username);
+        return isInResultSet(resultSet,primaryKey,record);
     }
 
 

@@ -5,20 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6f391096-c461-4cc7-930c-1b8792faea71" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/utils/SceneManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/userDashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/UserDashBoardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/utils/LoginManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/ConnectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/ConnectController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/Controller.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/RegistrationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/utils/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/utils/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/utils/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/utils/SceneManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Connect.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Connect.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Registration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Registration.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/userDashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/UserDashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Tervezesi_dokumentacio (Automatikusan helyreállítva).docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../Tervezesi_dokumentacio (Automatikusan helyreállítva).docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +72,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.16015625&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -113,6 +111,11 @@
       <workItem from="1731570571474" duration="2806000" />
       <workItem from="1731598271796" duration="8777000" />
       <workItem from="1731875366578" duration="8787000" />
+      <workItem from="1731889775600" duration="316000" />
+      <workItem from="1731961529064" duration="3502000" />
+      <workItem from="1732000518024" duration="5012000" />
+      <workItem from="1732034905997" duration="4725000" />
+      <workItem from="1732088648894" duration="3376000" />
     </task>
     <servers />
   </component>

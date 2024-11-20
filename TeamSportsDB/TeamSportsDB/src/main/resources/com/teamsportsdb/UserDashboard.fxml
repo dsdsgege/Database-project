@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane hgap="10" vgap="50" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.teamsportsdb.ui.UserDashBoardController" alignment="CENTER_LEFT">
+    <Button fx:id="queryButton" text="Lekérdezés" GridPane.rowIndex="0">
+    </Button>
+    <ChoiceBox fx:id="tableChoice" GridPane.columnIndex="1">
+
+    </ChoiceBox>
+
+    <Button fx:id="insertButton" text="Új adat" GridPane.rowIndex="1">
+
+    </Button>
+
+    <Button fx:id="updateButton" text="Adatmódosítás" GridPane.rowIndex="2">
+
+    </Button>
+
+    <Button fx:id="deleteButton" text="Adattörlés" GridPane.rowIndex="3">
+
+    </Button>
+
+    <Button fx:id="createButton" text="Új tábla" GridPane.rowIndex="4">
+
+    </Button>
+
+    <Button fx:id="alterButton" text="Táblamódosítás" GridPane.rowIndex="5">
+
+    </Button>
+
+    <Button fx:id="dropButton" text="Tábla/index/nézet törlése" GridPane.rowIndex="6">
+
+    </Button>
+
+    <Button fx:id="renameButton" text="Átnevezés" GridPane.rowIndex="7">
+
+    </Button>
+</GridPane>
