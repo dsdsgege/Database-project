@@ -40,7 +40,7 @@ public class MainController {
     @FXML
     private void initialize() {
         //WelcomeText disappearing after 3s and every other appears
-        PauseTransition disappear = new PauseTransition(Duration.seconds(3));
+        PauseTransition disappear = new PauseTransition(Duration.seconds(0));
         SceneManager.getPrimaryStage().setMaximized(true);
         disappear.setOnFinished(disappearEvent -> {
             welcomeText.setVisible(false);

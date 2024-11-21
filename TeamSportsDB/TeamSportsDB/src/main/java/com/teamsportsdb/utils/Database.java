@@ -17,6 +17,13 @@ public class Database {
     //Declare Connection object, set to null for later
     private static Connection connection = null;
 
+    public static Connection getConnection() {
+        return connection;
+    }
+
+    public static void setConnection(Connection connection) {
+        Database.connection = connection;
+    }
 
     //Method that handles the connection to the database
     public static void connect(String username, String password) throws SQLException, ClassNotFoundException {

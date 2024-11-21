@@ -4,39 +4,89 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane hgap="10" vgap="50" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="com.teamsportsdb.ui.UserDashBoardController" alignment="CENTER_LEFT">
-    <Button fx:id="queryButton" text="Lekérdezés" GridPane.rowIndex="0">
-    </Button>
-    <ChoiceBox fx:id="tableChoice" GridPane.columnIndex="1">
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<GridPane hgap="20" vgap="40" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.teamsportsdb.ui.UserDashBoardController" alignment="CENTER"
+          style="-fx-padding: 20; -fx-background-color: #f4f4f4;">
 
+<Button fx:id="queryButton" text="Lekérdezés" GridPane.rowIndex="0" onAction="#onQueryButtonAction"
+        style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;"
+>
+    </Button>
+    <Label GridPane.rowIndex="0" fx:id="headerLabel" visible = "false" GridPane.columnIndex="1"
+           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;" ></Label>
+
+    <Label fx:id="tableLabel"  visible = "false" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.rowSpan="2"
+           style="-fx-font-size: 14px; -fx-text-fill: #555;">Tábla</Label>
+    <ChoiceBox  fx:id="tableChoice" visible="false" GridPane.columnIndex="1"  GridPane.rowSpan="5"></ChoiceBox>
+
+    <Label fx:id="columnsLabel" GridPane.rowIndex="0" visible = "false" GridPane.columnIndex="2" GridPane.rowSpan="2"
+           style="-fx-font-size: 14px; -fx-text-fill: #555;">Oszolop(ok)</Label>
+    <TextField fx:id="columnsField" visible="false" promptText="pl.: nev,felhasznalonev" GridPane.columnIndex="2" GridPane.rowSpan="5" ></TextField>
+    <TextField fx:id="updateField" visible="false" promptText="p.:Jani,jani01" GridPane.columnIndex="3" GridPane.rowSpan="5"></TextField>
+    <Label fx:id="whereLabel" GridPane.rowIndex="0" visible = "false" GridPane.columnIndex="4" GridPane.rowSpan="2"
+           style="-fx-font-size: 14px; -fx-text-fill: #555;">Szűrés</Label>
+    <ChoiceBox fx:id="columnsChoice" visible = "false" GridPane.columnIndex="5" GridPane.rowSpan="5"
+               style="-fx-padding: 2; -fx-border-color: #ccc; -fx-border-width: 1; -fx-border-radius: 3;"></ChoiceBox>
+    <ChoiceBox fx:id="logicChoice" visible = "false" GridPane.columnIndex="6"  GridPane.rowSpan="5">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="nagyobb"></String>
+                <String fx:value="kisebb"></String>
+                <String fx:value="egyenlő"></String>
+                <String fx:value="nem egyenlő"></String>
+                <String fx:value="olyan, mint"></String>
+                <String fx:value="nem olyan"></String>
+                <String fx:value="és"></String>
+                <String fx:value="vagy"></String>
+            </FXCollections>
+        </items>
     </ChoiceBox>
-
-    <Button fx:id="insertButton" text="Új adat" GridPane.rowIndex="1">
-
-    </Button>
-
-    <Button fx:id="updateButton" text="Adatmódosítás" GridPane.rowIndex="2">
+    <TextField fx:id="valueField" visible = "false" GridPane.columnIndex="7" GridPane.rowSpan="5"> </TextField>
+    <Button fx:id="queryExecute" onAction="#onQueryExecuteAction" visible="false" GridPane.columnIndex="10" GridPane.rowIndex="10" text="Futtatás"
+            style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;">
 
     </Button>
 
-    <Button fx:id="deleteButton" text="Adattörlés" GridPane.rowIndex="3">
+
+
+    <Button fx:id="insertButton"  text="Új adat" GridPane.rowIndex="1"
+            style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;">
 
     </Button>
 
-    <Button fx:id="createButton" text="Új tábla" GridPane.rowIndex="4">
+    <Button fx:id="updateButton" text="Adatmódosítás" GridPane.rowIndex="2"
+            style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;">
 
     </Button>
 
-    <Button fx:id="alterButton" text="Táblamódosítás" GridPane.rowIndex="5">
+    <Button fx:id="deleteButton" text="Adattörlés" GridPane.rowIndex="3"
+            style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;">
 
     </Button>
 
-    <Button fx:id="dropButton" text="Tábla/index/nézet törlése" GridPane.rowIndex="6">
+    <Button fx:id="createButton" text="Új tábla" GridPane.rowIndex="4"
+            style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;">
 
     </Button>
 
-    <Button fx:id="renameButton" text="Átnevezés" GridPane.rowIndex="7">
+    <Button fx:id="alterButton" text="Táblamódosítás" GridPane.rowIndex="5"
+            style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;">
 
     </Button>
+
+    <Button fx:id="dropButton" text="Tábla/index/nézet törlése" GridPane.rowIndex="6"
+            style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;">
+
+    </Button>
+
+    <Button fx:id="renameButton" text="Átnevezés" GridPane.rowIndex="7"
+            style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;">
+
+    </Button>
+
+
+    <Label fx:id="errorMessage" text=" " style="-fx-text-fill: red; -fx-font-size: 14px; -fx-font-weight: bold;"  GridPane.columnIndex="0" GridPane.rowIndex="10"
+           visible="false" alignment="CENTER"/>
 </GridPane>
