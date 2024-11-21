@@ -24,6 +24,8 @@
     <Label fx:id="columnsLabel" GridPane.rowIndex="0" visible = "false" GridPane.columnIndex="2" GridPane.rowSpan="2"
            style="-fx-font-size: 14px; -fx-text-fill: #555;">Oszolop(ok)</Label>
     <TextField fx:id="columnsField" visible="false" promptText="pl.: nev,felhasznalonev" GridPane.columnIndex="2" GridPane.rowSpan="5" ></TextField>
+    <Label fx:id="updateLabel" GridPane.rowIndex="0" visible = "false" GridPane.columnIndex="3" GridPane.rowSpan="2"
+            style="-fx-font-size: 14px; -fx-text-fill: #555;">Értékek (fontos a sorrend)</Label>
     <TextField fx:id="updateField" visible="false" promptText="p.:Jani,jani01" GridPane.columnIndex="3" GridPane.rowSpan="5"></TextField>
     <Label fx:id="whereLabel" GridPane.rowIndex="0" visible = "false" GridPane.columnIndex="4" GridPane.rowSpan="2"
            style="-fx-font-size: 14px; -fx-text-fill: #555;">Szűrés</Label>
@@ -56,8 +58,12 @@
 
     </Button>
 
-    <Button fx:id="updateButton" text="Adatmódosítás" GridPane.rowIndex="2"
+    <Button fx:id="updateButton" text="Adatmódosítás" GridPane.rowIndex="2" onAction="#onUpdateButtonAction"
             style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;">
+
+    </Button>
+    <Button fx:id="updateExecute" onAction="#onUpdateExecuteAction" visible="false" GridPane.columnIndex="10" GridPane.rowIndex="10" text="Futtatás"
+            style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;">
 
     </Button>
 

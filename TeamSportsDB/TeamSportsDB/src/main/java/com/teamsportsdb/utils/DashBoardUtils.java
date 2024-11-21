@@ -2,9 +2,13 @@ package com.teamsportsdb.utils;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import org.hibernate.annotations.processing.SQL;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -50,6 +54,8 @@ public class DashBoardUtils {
             throw new RuntimeException("Choice box or sql query is null");
         }
 
+        choiceBox.getItems().clear();
+
         ResultSet result = Database.executeQuery(query);
         ArrayList<String> options = new ArrayList<>();
         try {
@@ -67,5 +73,61 @@ public class DashBoardUtils {
                 throw new RuntimeException(e);
             }
         }
+    }
+    
+    public static void setVisible(boolean bool, Node... nodes) throws RuntimeException {
+        try{
+            for (Node node : nodes) {
+                node.setVisible(bool);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean isAnyNull( String... strings) {
+        for (String str : strings) {
+            if(str == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isDatatypeCorrect(String table, String column, String value) throws RuntimeException {
+        String query = "SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '" + table + "' AND COLUMN_NAME = '" + column + "'" ;
+        String type = "";
+        try (PreparedStatement statement = Database.getConnection().prepareStatement(query)){
+            ResultSet result = statement.executeQuery();
+            if(result.next()) {
+                type = result.getString("DATA_TYPE");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            switch (type.toLowerCase()) {
+                case "int":
+                    int intValue = Integer.parseInt(value);
+                    break;
+                case "double":
+                    double doubleValue = Double.parseDouble(value);
+                    break;
+                case "varchar":
+                    if(value instanceof String) {
+                        return true;
+                    }
+                    break;
+                case "date":
+                    if(value.charAt(4) == '-' && value.charAt(7) == '-' && value.charAt(10) == '-') {
+                        return true;
+                    }
+                    break;
+            }
+        } catch (NumberFormatException e) {
+           return false;
+        }
+        return true;
     }
 }
