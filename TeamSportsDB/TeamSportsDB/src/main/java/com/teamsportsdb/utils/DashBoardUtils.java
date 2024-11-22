@@ -3,6 +3,7 @@ package com.teamsportsdb.utils;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -129,5 +130,25 @@ public class DashBoardUtils {
            return false;
         }
         return true;
+    }
+
+    //Method to get all the columns names of a table in an array
+    public static String[] columnNamesToArray(String table) throws RuntimeException {
+        ArrayList<String> columnNames = new ArrayList<>();
+        try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement(
+                "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNs WHERE TABLE_NAME = ?")) {
+            preparedStatement.setString(1,table);
+            try {
+                ResultSet rs = preparedStatement.executeQuery();
+                while (rs.next()) {
+                    columnNames.add(rs.getString("COLUMN_NAME"));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return columnNames.toArray(new String[columnNames.size()]);
     }
 }

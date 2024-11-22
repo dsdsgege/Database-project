@@ -2,10 +2,13 @@ package com.teamsportsdb.ui;
 
 import com.teamsportsdb.utils.DashBoardUtils;
 import com.teamsportsdb.utils.Database;
+import com.teamsportsdb.utils.LoginManager;
+import com.teamsportsdb.utils.SceneManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,6 +18,8 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import org.hibernate.annotations.processing.SQL;
 
+import javax.swing.event.ChangeEvent;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -23,16 +28,14 @@ public class UserDashBoardController {
     private GridPane gridPane;
 
     @FXML
-    private Button queryButton,insertButton,updateButton,deleteButton,createButton,
-            alterButton,dropButton,renameButton,queryExecute,updateExecute;
+    private Button queryButton,insertButton,updateButton,deleteButton,queryExecute,updateExecute,insertExecute,deleteExecute;
 
     @FXML
     private Label errorMessage;
 
 
-    //queryButton pressed
     @FXML
-    private Label headerLabel, tableLabel, columnsLabel,updateLabel, whereLabel;
+    private Label headerLabel, tableLabel, columnsLabel,updateLabel, whereLabel, loggedInLabel;
     @FXML
     private ChoiceBox<String> tableChoice, columnsChoice, logicChoice;
     @FXML
@@ -40,45 +43,53 @@ public class UserDashBoardController {
 
 
 
-    public void initialize() {
+    public void initialize()  {
+        if(LoginManager.getName() == null || LoginManager.getUsername() == null || LoginManager.getPassword() == null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/teamsportsdb/Main.fxml"));
+            try {
+                SceneManager.getPrimaryStage().setScene(new Scene(fxmlLoader.load()));
+                SceneManager.getPrimaryStage().setMaximized(true);
+            } catch (IOException e) {
+                errorMessage.setText(e.getMessage());
+                errorMessage.setVisible(true);
+            }
+        }
+        loggedInLabel.setText("Bejelentkezve: " + LoginManager.getUsername());
+        SceneManager.getPrimaryStage().setMaximized(true);
         //queryButton hover effect
         queryButton.setOnMouseClicked(event-> {
-            DashBoardUtils.updateButtonStyles(queryButton,queryButton,insertButton,updateButton,deleteButton,
-                    createButton,alterButton,dropButton,renameButton);
+            DashBoardUtils.updateButtonStyles(queryButton,queryButton,insertButton,updateButton,deleteButton);
         });
         //queryButton hover effect
         insertButton.setOnMouseClicked(event-> {
-            DashBoardUtils.updateButtonStyles(insertButton,queryButton,insertButton,updateButton,deleteButton,
-                    createButton,alterButton,dropButton,renameButton);
+            DashBoardUtils.updateButtonStyles(insertButton,queryButton,insertButton,updateButton,deleteButton);
         });
         updateButton.setOnMouseClicked(event-> {
-            DashBoardUtils.updateButtonStyles(updateButton,queryButton,insertButton,updateButton,deleteButton,
-                    createButton,alterButton,dropButton,renameButton);
+            DashBoardUtils.updateButtonStyles(updateButton,queryButton,insertButton,updateButton,deleteButton);
         });
         deleteButton.setOnMouseClicked(event-> {
-            DashBoardUtils.updateButtonStyles(deleteButton,queryButton,insertButton,updateButton,deleteButton,
-                    createButton,alterButton,dropButton,renameButton);
-        });
-        createButton.setOnMouseClicked(event-> {
-            DashBoardUtils.updateButtonStyles(createButton,queryButton,insertButton,updateButton,deleteButton,
-                    createButton,alterButton,dropButton,renameButton);
-        });
-        alterButton.setOnMouseClicked(event-> {
-            DashBoardUtils.updateButtonStyles(alterButton,queryButton,insertButton,updateButton,deleteButton,
-                    createButton,alterButton,dropButton,renameButton);
-        });
-        dropButton.setOnMouseClicked(event-> {
-            DashBoardUtils.updateButtonStyles(dropButton,queryButton,insertButton,updateButton,deleteButton,
-                    createButton,alterButton,dropButton,renameButton);
-        });
-        renameButton.setOnMouseClicked(event-> {
-            DashBoardUtils.updateButtonStyles(renameButton,queryButton,insertButton,updateButton,deleteButton,
-                    createButton,alterButton,dropButton,renameButton);
+            DashBoardUtils.updateButtonStyles(deleteButton,queryButton,insertButton,updateButton,deleteButton);
         });
     }
 
+    public void onExitButtonAction() throws IOException {
+        LoginManager.setName(null);
+        LoginManager.setUsername(null);
+        LoginManager.setPassword(null);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/teamsportsdb/Main.fxml"));
+        Scene mainScene = new Scene(fxmlLoader.load());
+        SceneManager.getPrimaryStage().setScene(mainScene);
+        SceneManager.getPrimaryStage().setMaximized(true);
+
+    }
+
     public void onQueryButtonAction() {
+        //hide every node that is for managing
+        DashBoardUtils.setVisible(false,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
+                columnsChoice,logicChoice,valueField, queryExecute, updateExecute, updateLabel, updateField,errorMessage,insertExecute);
         headerLabel.setText("Lekérdezés:");
+        //show the nodes that is for this particular managing (query)
         DashBoardUtils.setVisible(true,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
                 columnsChoice,logicChoice,valueField,
                 queryExecute);
@@ -118,68 +129,145 @@ public class UserDashBoardController {
         String logic = logicChoice.getSelectionModel().getSelectedItem();
         String value = valueField.getText();
 
-        //Checking if every field has been set
-        if(DashBoardUtils.isAnyNull(table,columns,whereColumns,logic,value)) {
-            errorMessage.setText("Kérlek minden mezőt tölts ki");
+        //Checking if table and columns has been set
+        if(table == null || columns == null ) {
+            errorMessage.setText("A táblát és oszlopokat kötelező megadni!");
             errorMessage.setVisible(true);
         }
 
         //Getting the logical operator of logicChoice
-        logic = DashBoardUtils.getLogicalOperator(logic);
-        String[] columnsArray = columns.split(",");
-        String query = "SELECT %s FROM %s WHERE %s %s ?".formatted(columns,table,whereColumns,logic);
+        if(logic != null) {
+            logic = DashBoardUtils.getLogicalOperator(logic);
+        }
+
+
+        String selectedColumns = columns.equalsIgnoreCase("mind") ? "*": columns;
+        String query;
+        if(whereColumns == null || logic == null || value == null) {
+            errorMessage.setText("FIGYELEM!! Szűrés nélküli lekérdezés!");
+            errorMessage.setVisible(true);
+            query = "SELECT %s FROM %s".formatted(selectedColumns,table);
+        } else {
+            query = "SELECT %s FROM %s WHERE %s %s ?".formatted(selectedColumns,table,whereColumns,logic);
+        }
 
         //executin with prepared statement
+        String[] columnsArray = null;
         try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement(query)) {
-            preparedStatement.setString(1, value);
-            try {
-                if (!DashBoardUtils.isDatatypeCorrect(table, whereColumns, value)) {
-                    errorMessage.setText("Rossz adattípus! " + value);
-                    errorMessage.setVisible(true);
-                    return;
-                }
-            } catch (Exception e) {
-                errorMessage.setText(e.getMessage());
-                errorMessage.setVisible(true);
-            }
+            if(whereColumns != null && logic != null && value != null)
+                preparedStatement.setString(1, value);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
                 int rowIndex = 1;
                 gridPane = new GridPane();
                 gridPane.setHgap(50);
-                gridPane.setVgap(20);
-                gridPane.setAlignment(Pos.CENTER);
+                gridPane.setVgap(50);
 
                 while (resultSet.next()) {
+                    if(selectedColumns.equals("*")) {
+                        //dynamically getting the columns to an array
+                        try {
+                            columnsArray = DashBoardUtils.columnNamesToArray(table);
+                        } catch (RuntimeException e) {
+                            errorMessage.setText(e.getMessage());
+                            errorMessage.setVisible(true);
+                        }
+                    } else {
+                        columnsArray = columns.split(",");
+                    }
+
                     for (int i = 0; i < columnsArray.length; i++) {
                         String trimmedColumn = columnsArray[i].trim();
-                        Label columnLabel = new Label(trimmedColumn);
-                        columnLabel.setFont(Font.font("Verdana",FontWeight.BOLD,30));
                         gridPane.add(new Label(trimmedColumn), i, 0);
                         gridPane.add(new Label(resultSet.getString(trimmedColumn)), i, rowIndex);
                     }
                     ++rowIndex;
                 }
-
+                gridPane.setAlignment(Pos.CENTER);
                 Scene scene = new Scene(gridPane);
                 Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.show();
-
                 DashBoardUtils.setVisible(false,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
-                        columnsChoice,logicChoice,valueField,
-                        queryExecute);
+                        columnsChoice,logicChoice,valueField, queryExecute, updateExecute, updateLabel, updateField,errorMessage,insertExecute);
             }
+        } catch (SQLException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
+
+    }
+
+    //Új adat button
+    //INSERT INTO
+    public void onInsertButtonAction() {
+        //hide every node that is for any kind of managing
+        DashBoardUtils.setVisible(false,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
+                columnsChoice,logicChoice,valueField, queryExecute, updateExecute, updateLabel, updateField,errorMessage,insertExecute);
+        //show the labels that we need for this managing (INSERT INTO)
+        headerLabel.setText("Új adat felvitele:");
+        DashBoardUtils.setVisible(true,headerLabel, tableLabel,tableChoice,columnsLabel,columnsField, updateLabel, updateField, insertExecute);
+
+        //Getting the table options for the choicebox
+        try {
+            DashBoardUtils.choiceBoxOptions(tableChoice,"SHOW TABLES","tables_in_teamsports");
+        } catch (RuntimeException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
+    }
+
+    //Futtatás when Új adat is clicked
+    public void onInsertExecuteAction() {
+        //Making variables of the given datas
+        String table = tableChoice.getSelectionModel().getSelectedItem();
+        String columns = columnsField.getText();
+        String values = updateField.getText();
+
+        if(table == null || values == null){
+            errorMessage.setText("A tábla és adatok kitöltése kötelező!");
+            errorMessage.setVisible(true);
+            return;
+        }
+
+        String[] columnsArray = columns.split(",");
+        String[] valuesArray = values.split(",");
+        if(valuesArray.length % columnsArray.length != 0 ){
+            errorMessage.setText("Az értékek az oszlopok számának többszörösei kell, hogy legyenek");
+            errorMessage.setVisible(true);
+            return;
+        }
+
+        String valuesPlaceHolers = "";
+        for (int i = 0; i < valuesArray.length-1; i++) {
+            valuesPlaceHolers += "?,";
+        }
+        valuesPlaceHolers += "?";
+
+        String query = "INSERT INTO %s (%s) VALUES (%s)".formatted(table,columns,valuesPlaceHolers);
+        try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement(query)) {
+            for (int j = 0; j < valuesArray.length; j++) {
+                preparedStatement.setString(j+1, valuesArray[j].trim());
+            }
+            preparedStatement.executeUpdate();
+
+            DashBoardUtils.setVisible(false,headerLabel, tableLabel,tableChoice,columnsLabel,columnsField, updateLabel, updateField, insertExecute, errorMessage, insertExecute);
         } catch (SQLException e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
         }
     }
 
-    //Adatmódosítás button
-    public void onUpdateButtonAction() {
 
-        //setting up the labels, choiceboxes and fields
+
+    //Adatmódosítás button
+    //Update statement
+    public void onUpdateButtonAction() {
+        //hide every node that is for managing
+        DashBoardUtils.setVisible(false,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
+                columnsChoice,logicChoice,valueField, queryExecute, updateExecute, updateLabel, updateField,errorMessage,insertExecute);
+        //show the labels that is for this particular managing (UPDATE)
         headerLabel.setText("Oszlop értékének megváltoztatása:");
         DashBoardUtils.setVisible(true,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,updateLabel,updateField,whereLabel,columnsChoice,logicChoice,valueField,
                 updateExecute);
@@ -192,7 +280,8 @@ public class UserDashBoardController {
             errorMessage.setVisible(true);
         }
 
-        //Setting the options for the
+        //Setting the options for the tableChoice
+        //using the util method to adding options with query
         tableChoice.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
@@ -205,8 +294,9 @@ public class UserDashBoardController {
                 }
             }
         });
-
     }
+
+
 
     public void onUpdateExecuteAction() {
         //Getting the datas from the nodes
@@ -218,8 +308,8 @@ public class UserDashBoardController {
         String value = valueField.getText();
 
         //checking if theyre nulls
-        if(DashBoardUtils.isAnyNull(table,columns,updateValues,whereColumn,logic,value)) {
-            errorMessage.setText("Kérlek minden mezőt tölts ki");
+        if(DashBoardUtils.isAnyNull(table,columns,updateValues)) {
+            errorMessage.setText("Minden mezőt kötelező kitölteni, a szűrésen kívül");
             errorMessage.setVisible(true);
         }
 
@@ -237,7 +327,9 @@ public class UserDashBoardController {
             }
         }
 
-        logic = DashBoardUtils.getLogicalOperator(logic);
+        if(logic != null) {
+            logic = DashBoardUtils.getLogicalOperator(logic);
+        }
 
         String update = "UPDATE %s SET %s = ? WHERE %s %s ?";
         for (int i = 0; i < columnsArray.length; i++) {
@@ -249,17 +341,21 @@ public class UserDashBoardController {
                     errorMessage.setVisible(true);
                     return;
                 }
+                if(whereColumn != null && logic != null && value != null) {
                     preparedStatement.setString(2, value);
-                if(!DashBoardUtils.isDatatypeCorrect(table,columnsArray[i],value)) {
-                    errorMessage.setText("Rossz adattípus! " + value);
-                    errorMessage.setVisible(true);
-                    return;
+                    if(!DashBoardUtils.isDatatypeCorrect(table,columnsArray[i],value)) {
+                        errorMessage.setText("Rossz adattípus! " + value);
+                        errorMessage.setVisible(true);
+                        return;
+                    }
+                } else {
+                    preparedStatement.setString(2, "");
                 }
 
                     //execute the update
                     preparedStatement.executeUpdate();
-                    DashBoardUtils.setVisible(false,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,updateLabel,updateField,whereLabel,columnsChoice,logicChoice,valueField,
-                        updateExecute);
+                DashBoardUtils.setVisible(false,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
+                        columnsChoice,logicChoice,valueField, queryExecute, updateExecute, updateLabel, updateField,errorMessage,insertExecute);
 
             } catch (SQLException e){
                 errorMessage.setText(e.getMessage());

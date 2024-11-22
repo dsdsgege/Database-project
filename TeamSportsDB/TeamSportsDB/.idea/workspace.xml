@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/UserDashBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/UserDashBoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/utils/DashBoardUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/utils/DashBoardUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Main.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/UserDashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/UserDashboard.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +59,7 @@
   "keyToString": {
     "Application.ConnectController.executor": "Run",
     "Application.HelloApplication.executor": "Run",
-    "Application.MainApplication.executor": "Run",
+    "Application.MainApplication.executor": "Debug",
     "Application.Test.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "Repository.Attach.Annotations": "false",
@@ -77,7 +78,7 @@
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.16015625",
-    "project.structure.side.proportion": "0.2",
+    "project.structure.side.proportion": "0.29785407",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -120,7 +121,8 @@
       <workItem from="1732034905997" duration="4725000" />
       <workItem from="1732088648894" duration="3376000" />
       <workItem from="1732114088174" duration="22419000" />
-      <workItem from="1732175215317" duration="15130000" />
+      <workItem from="1732175215317" duration="19496000" />
+      <workItem from="1732293299008" duration="9768000" />
     </task>
     <servers />
   </component>
