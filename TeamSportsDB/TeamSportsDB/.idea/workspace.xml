@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f391096-c461-4cc7-930c-1b8792faea71" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/UserDashBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/ui/UserDashBoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/utils/DashBoardUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/teamsportsdb/utils/DashBoardUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/Main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/UserDashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/teamsportsdb/UserDashboard.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="6f391096-c461-4cc7-930c-1b8792faea71" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,7 +116,7 @@
       <workItem from="1732088648894" duration="3376000" />
       <workItem from="1732114088174" duration="22419000" />
       <workItem from="1732175215317" duration="19496000" />
-      <workItem from="1732293299008" duration="9768000" />
+      <workItem from="1732293299008" duration="10663000" />
     </task>
     <servers />
   </component>
