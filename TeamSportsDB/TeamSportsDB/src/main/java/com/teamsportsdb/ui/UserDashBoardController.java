@@ -12,7 +12,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -54,6 +56,7 @@ public class UserDashBoardController {
                 errorMessage.setVisible(true);
             }
         }
+        loggedInLabel.setStyle("-fx-font-size: 16px;");
         loggedInLabel.setText("Bejelentkezve: " + LoginManager.getUsername());
         SceneManager.getPrimaryStage().setMaximized(true);
         //queryButton hover effect
@@ -86,13 +89,20 @@ public class UserDashBoardController {
 
     public void onQueryButtonAction() {
         //hide every node that is for managing
-        DashBoardUtils.setVisible(false,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
-                columnsChoice,logicChoice,valueField, queryExecute, updateExecute, updateLabel, updateField,errorMessage,insertExecute);
-        headerLabel.setText("Lekérdezés:");
-        //show the nodes that is for this particular managing (query)
-        DashBoardUtils.setVisible(true,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
-                columnsChoice,logicChoice,valueField,
-                queryExecute);
+        try {
+
+
+            DashBoardUtils.setVisible(false, headerLabel, tableLabel, tableChoice, columnsLabel, columnsField, whereLabel,
+                    columnsChoice, logicChoice, valueField, queryExecute, updateExecute, updateLabel, updateField, errorMessage, insertExecute, deleteExecute);
+            headerLabel.setText("Adatok lekérdezése:");
+            //show the nodes that is for this particular managing (query)
+            DashBoardUtils.setVisible(true, headerLabel, tableLabel, tableChoice, columnsLabel, columnsField, whereLabel,
+                    columnsChoice, logicChoice, valueField,
+                    queryExecute);
+        } catch (Exception e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
 
 
         //Using my util to load the choices of the tables
@@ -161,8 +171,8 @@ public class UserDashBoardController {
 
                 int rowIndex = 1;
                 gridPane = new GridPane();
-                gridPane.setHgap(50);
-                gridPane.setVgap(50);
+                gridPane.setHgap(10); // Set horizontal spacing between columns
+                gridPane.setVgap(10); // Set vertical spacing between rows
 
                 while (resultSet.next()) {
                     if(selectedColumns.equals("*")) {
@@ -179,8 +189,13 @@ public class UserDashBoardController {
 
                     for (int i = 0; i < columnsArray.length; i++) {
                         String trimmedColumn = columnsArray[i].trim();
-                        gridPane.add(new Label(trimmedColumn), i, 0);
-                        gridPane.add(new Label(resultSet.getString(trimmedColumn)), i, rowIndex);
+                        Label firstRow = new Label(trimmedColumn);
+                        firstRow.setStyle("-fx-border-color:black; -fx-border-width: 2px; -fx-padding: 5px; -fx-font-size: 16px");
+
+                        Label dataRow = new Label(resultSet.getString(trimmedColumn));
+                        dataRow.setStyle("-fx-border-color:grey; -fx-border-width: 1px; -fx-padding: 2px;");
+                        gridPane.add(firstRow, i, 0);
+                        gridPane.add(dataRow, i, rowIndex);
                     }
                     ++rowIndex;
                 }
@@ -189,8 +204,7 @@ public class UserDashBoardController {
                 Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.show();
-                DashBoardUtils.setVisible(false,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
-                        columnsChoice,logicChoice,valueField, queryExecute, updateExecute, updateLabel, updateField,errorMessage,insertExecute);
+                errorMessage.setVisible(false);
             }
         } catch (SQLException e) {
             errorMessage.setText(e.getMessage());
@@ -203,11 +217,17 @@ public class UserDashBoardController {
     //INSERT INTO
     public void onInsertButtonAction() {
         //hide every node that is for any kind of managing
-        DashBoardUtils.setVisible(false,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
-                columnsChoice,logicChoice,valueField, queryExecute, updateExecute, updateLabel, updateField,errorMessage,insertExecute);
-        //show the labels that we need for this managing (INSERT INTO)
-        headerLabel.setText("Új adat felvitele:");
-        DashBoardUtils.setVisible(true,headerLabel, tableLabel,tableChoice,columnsLabel,columnsField, updateLabel, updateField, insertExecute);
+        try {
+            DashBoardUtils.setVisible(false, headerLabel, tableLabel, tableChoice, columnsLabel, columnsField, whereLabel,
+                    columnsChoice, logicChoice, valueField, queryExecute, updateExecute, updateLabel, updateField, errorMessage, insertExecute, deleteExecute);
+
+            //show the labels that we need for this managing (INSERT INTO)
+            headerLabel.setText("Új adat(ok) felvitele:");
+            DashBoardUtils.setVisible(true, headerLabel, tableLabel, tableChoice, columnsLabel, columnsField, updateLabel, updateField, insertExecute);
+        } catch (RuntimeException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
 
         //Getting the table options for the choicebox
         try {
@@ -251,8 +271,7 @@ public class UserDashBoardController {
                 preparedStatement.setString(j+1, valuesArray[j].trim());
             }
             preparedStatement.executeUpdate();
-
-            DashBoardUtils.setVisible(false,headerLabel, tableLabel,tableChoice,columnsLabel,columnsField, updateLabel, updateField, insertExecute, errorMessage, insertExecute);
+            errorMessage.setVisible(false);
         } catch (SQLException e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
@@ -265,12 +284,22 @@ public class UserDashBoardController {
     //Update statement
     public void onUpdateButtonAction() {
         //hide every node that is for managing
-        DashBoardUtils.setVisible(false,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
-                columnsChoice,logicChoice,valueField, queryExecute, updateExecute, updateLabel, updateField,errorMessage,insertExecute);
+        try {
+            DashBoardUtils.setVisible(false, headerLabel, tableLabel, tableChoice, columnsLabel, columnsField, whereLabel,
+                    columnsChoice, logicChoice, valueField, queryExecute, updateExecute, updateLabel, updateField, errorMessage, insertExecute, deleteExecute);
+        } catch (RuntimeException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
         //show the labels that is for this particular managing (UPDATE)
-        headerLabel.setText("Oszlop értékének megváltoztatása:");
-        DashBoardUtils.setVisible(true,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,updateLabel,updateField,whereLabel,columnsChoice,logicChoice,valueField,
-                updateExecute);
+        headerLabel.setText("Adatok megváltoztatása:");
+        try {
+            DashBoardUtils.setVisible(true, headerLabel, tableLabel, tableChoice, columnsLabel, columnsField, updateLabel, updateField, whereLabel, columnsChoice, logicChoice, valueField,
+                    updateExecute);
+        } catch (RuntimeException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
 
         //Setting the options for the tables
         try {
@@ -354,14 +383,93 @@ public class UserDashBoardController {
 
                     //execute the update
                     preparedStatement.executeUpdate();
-                DashBoardUtils.setVisible(false,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
-                        columnsChoice,logicChoice,valueField, queryExecute, updateExecute, updateLabel, updateField,errorMessage,insertExecute);
-
+                    errorMessage.setVisible(false);
             } catch (SQLException e){
                 errorMessage.setText(e.getMessage());
                 errorMessage.setVisible(true);
             }
 
+        }
+    }
+
+    public void onDeleteButtonAction() {
+        //hide the managing space
+        try {
+            DashBoardUtils.setVisible(false,headerLabel,tableLabel,tableChoice,columnsLabel,columnsField,whereLabel,
+                    columnsChoice,logicChoice,valueField, queryExecute, updateExecute, updateLabel, updateField,errorMessage,insertExecute,deleteExecute);
+        } catch  (RuntimeException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
+
+
+        headerLabel.setText("Adatok törlése:");
+        try {
+            DashBoardUtils.setVisible(true,tableLabel, headerLabel,tableChoice,whereLabel,columnsChoice,logicChoice,valueField,deleteExecute);
+        } catch (RuntimeException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
+
+        try{
+            DashBoardUtils.choiceBoxOptions(tableChoice,"SHOW TABLES","Tables_in_teamsports");
+        } catch (RuntimeException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
+
+        tableChoice.valueProperty().addListener(new ChangeListener<String>() {
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                String table = tableChoice.getSelectionModel().getSelectedItem();
+
+                try {
+                    DashBoardUtils.choiceBoxOptions(columnsChoice, "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '%s'".formatted(table),
+                            "COLUMN_NAME");
+                } catch (RuntimeException e) {
+                    errorMessage.setText(e.getMessage());
+                    errorMessage.setVisible(true);
+                }
+            }
+        });
+    }
+
+    public void onDeleteExecuteAction() {
+        String table = tableChoice.getSelectionModel().getSelectedItem();
+        String whereColumn = columnsChoice.getSelectionModel().getSelectedItem();
+        String logic = DashBoardUtils.getLogicalOperator(logicChoice.getSelectionModel().getSelectedItem());
+        String value= valueField.getText();
+
+        if(table == null) {
+            errorMessage.setText("Legalább a táblát meg kell adni!");
+            errorMessage.setVisible(true);
+            return;
+        }
+
+        String query = "DELETE FROM %s".formatted(table);
+
+        if(whereColumn != null && logic != null && value != null) {
+            query += " WHERE %s %s ?".formatted(whereColumn,logic);
+        }
+
+        try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement(query)) {
+            preparedStatement.setString(1, value);
+            if(!DashBoardUtils.isDatatypeCorrect(table,whereColumn,value)) {
+                errorMessage.setText("Rossz adattípus! " + value);
+                errorMessage.setVisible(true);
+                return;
+            }
+
+            if(value.equals(LoginManager.getUsername())) {
+                errorMessage.setText("Saját magad nem törölheted ki!");
+                errorMessage.setVisible(true);
+                return;
+            }
+
+            preparedStatement.executeUpdate();
+            errorMessage.setVisible(false);
+        } catch (SQLException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
         }
 
     }

@@ -36,6 +36,8 @@ public class DashBoardUtils {
             case "nem olyan":
                 logic = "NOT LIKE";
                 break;
+            default:
+                logic = "=";
         }
         return logic;
     }

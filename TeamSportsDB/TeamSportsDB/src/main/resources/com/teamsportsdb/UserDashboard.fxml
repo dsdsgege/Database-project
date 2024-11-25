@@ -35,21 +35,18 @@
     <TextField fx:id="valueField" visible="false" GridPane.columnIndex="7" GridPane.rowSpan="5"> </TextField>
     <Button fx:id="queryExecute" onAction="#onQueryExecuteAction" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Futtatás" visible="false" GridPane.columnIndex="10" GridPane.rowIndex="10" />
 
-
-
-
     <Button fx:id="insertButton" onAction="#onInsertButtonAction" prefHeight="35.0" prefWidth="137.0" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Új adat" GridPane.rowIndex="1" />
     <Button fx:id="insertExecute"   onAction="#onInsertExecuteAction" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Futtatás" visible="false" GridPane.columnIndex="10" GridPane.rowIndex="10" />
-
 
     <Button fx:id="updateButton" onAction="#onUpdateButtonAction" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Adatmódosítás" GridPane.rowIndex="2" />
     <Label fx:id="updateLabel" style="-fx-font-size: 14px; -fx-text-fill: #555;" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.rowSpan="2">Értékek (sorrendet tartva)</Label>
     <TextField fx:id="updateField" promptText="p.:Jani,jani01" visible="false" GridPane.columnIndex="3" GridPane.rowSpan="5" />
     <Button fx:id="updateExecute" onAction="#onUpdateExecuteAction" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Futtatás" visible="false" GridPane.columnIndex="10" GridPane.rowIndex="10" />
 
-    <Button fx:id="deleteButton" prefHeight="35.0" prefWidth="137.0" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Adattörlés" GridPane.rowIndex="3">
-
+    <Button fx:id="deleteButton" prefHeight="35.0" onAction="#onDeleteButtonAction" prefWidth="137.0" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Adattörlés" GridPane.rowIndex="3">
     </Button>
+    <Button fx:id="deleteExecute"   onAction="#onDeleteExecuteAction" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Futtatás" visible="false" GridPane.columnIndex="10" GridPane.rowIndex="10" />
+
 
 
     <Label fx:id="errorMessage" alignment="CENTER" prefHeight="104.0" prefWidth="728.0" style="-fx-text-fill: red; -fx-font-size: 14px; -fx-font-weight: bold;" text=" " visible="false" GridPane.columnIndex="3" GridPane.columnSpan="2147483647" GridPane.halignment="LEFT" GridPane.rowIndex="11" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" />

@@ -1,4 +1,4 @@
-    package com.teamsportsdb;
+package com.teamsportsdb;
 
     import com.teamsportsdb.utils.SceneManager;
     import javafx.application.Application;
