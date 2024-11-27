@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Screen;
+
+import java.io.IOException;
 
 
 public class RegistrationController {
@@ -41,10 +44,23 @@ public class RegistrationController {
 
             //Switching the scene to the user dashboard where the users can manipulate data
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/teamsportsdb/UserDashBoard.fxml"));
-            Scene userDashBoardScene = new Scene(fxmlLoader.load(),900,600);
+            Scene userDashBoardScene = new Scene(fxmlLoader.load());
             SceneManager.getPrimaryStage().setScene(userDashBoardScene);
-
+            //SceneManager.getPrimaryStage().setFullScreen(true);
         } catch (Exception e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
+    }
+
+    public void onBackButtonAction() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/teamsportsdb/Main.fxml"));
+        try {
+            Scene mainScene = new Scene(fxmlLoader.load(), Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
+            SceneManager.getPrimaryStage().setScene(mainScene);
+            //SceneManager.getPrimaryStage().setFullScreen(true);
+
+        } catch (IOException e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
         }

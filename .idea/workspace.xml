@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="72015872-dc7e-40a2-9abf-f97eba7a0f36" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/ComplexQueryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/ComplexQuery.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/ConnectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/ConnectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/RegistrationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/UserDashBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/UserDashBoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/utils/DashBoardUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/utils/DashBoardUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/utils/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/utils/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/utils/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/utils/SceneManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/Connect.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/Connect.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/Registration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/Registration.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/UserDashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/UserDashboard.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2pAqgoB6JIZsijARb6NWXqjsUz2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/Documents/GitHub/Database-project/mysql-connector-j-9.1.0/mysql-connector-j-9.1.0.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.21875&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.45682102&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="72015872-dc7e-40a2-9abf-f97eba7a0f36" name="Changes" comment="" />
+      <created>1732219342004</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732219342004</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Database_project$MainApplication.ic" NAME="MainApplication Coverage Results" MODIFIED="1732720468065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.teamsportsdb.*</FILTER>
+    </SUITE>
+  </component>
+</project>

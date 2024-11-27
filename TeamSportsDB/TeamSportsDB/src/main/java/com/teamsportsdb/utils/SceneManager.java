@@ -1,6 +1,8 @@
 package com.teamsportsdb.utils;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class SceneManager {
@@ -9,7 +11,6 @@ public class SceneManager {
     public static void setPrimaryStage(Stage primaryStage) {
         PrimaryStage = primaryStage;
         PrimaryStage.setTitle("Csapatsport");
-        PrimaryStage.setMaximized(true);
     }
 
     public static Stage getPrimaryStage() {

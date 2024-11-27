@@ -6,28 +6,26 @@ import com.teamsportsdb.utils.LoginManager;
 import com.teamsportsdb.utils.SceneManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.hibernate.annotations.processing.SQL;
 
-import javax.swing.event.ChangeEvent;
+
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
+
 
 
 public class UserDashBoardController {
     private GridPane gridPane;
+
+    @FXML
+    private GridPane firstGridPane;
 
     @FXML
     private Button queryButton,insertButton,updateButton,deleteButton,queryExecute,updateExecute,insertExecute,deleteExecute;
@@ -49,8 +47,9 @@ public class UserDashBoardController {
         if(LoginManager.getName() == null || LoginManager.getUsername() == null || LoginManager.getPassword() == null) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/teamsportsdb/Main.fxml"));
             try {
-                SceneManager.getPrimaryStage().setScene(new Scene(fxmlLoader.load()));
-                SceneManager.getPrimaryStage().setMaximized(true);
+
+                SceneManager.getPrimaryStage().setScene(new Scene(fxmlLoader.load(), Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight()));
+                //SceneManager.getPrimaryStage().setFullScreen(true);
             } catch (IOException e) {
                 errorMessage.setText(e.getMessage());
                 errorMessage.setVisible(true);
@@ -58,7 +57,7 @@ public class UserDashBoardController {
         }
         loggedInLabel.setStyle("-fx-font-size: 16px;");
         loggedInLabel.setText("Bejelentkezve: " + LoginManager.getUsername());
-        SceneManager.getPrimaryStage().setMaximized(true);
+        //SceneManager.getPrimaryStage().setFullScreen(true);
         //queryButton hover effect
         queryButton.setOnMouseClicked(event-> {
             DashBoardUtils.updateButtonStyles(queryButton,queryButton,insertButton,updateButton,deleteButton);
@@ -81,17 +80,14 @@ public class UserDashBoardController {
         LoginManager.setPassword(null);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/teamsportsdb/Main.fxml"));
-        Scene mainScene = new Scene(fxmlLoader.load());
+        Scene mainScene = new Scene(fxmlLoader.load(), Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
         SceneManager.getPrimaryStage().setScene(mainScene);
-        SceneManager.getPrimaryStage().setMaximized(true);
-
+        //SceneManager.getPrimaryStage().setFullScreen(true);
     }
 
     public void onQueryButtonAction() {
         //hide every node that is for managing
         try {
-
-
             DashBoardUtils.setVisible(false, headerLabel, tableLabel, tableChoice, columnsLabel, columnsField, whereLabel,
                     columnsChoice, logicChoice, valueField, queryExecute, updateExecute, updateLabel, updateField, errorMessage, insertExecute, deleteExecute);
             headerLabel.setText("Adatok lekérdezése:");
@@ -125,7 +121,6 @@ public class UserDashBoardController {
                     errorMessage.setText(e.getMessage());
                     errorMessage.setVisible(true);
                 }
-
             }
         });
     }
@@ -195,9 +190,9 @@ public class UserDashBoardController {
                         Label dataRow = new Label(resultSet.getString(trimmedColumn));
                         dataRow.setStyle("-fx-border-color:grey; -fx-border-width: 1px; -fx-padding: 2px;");
                         gridPane.add(firstRow, i, 0);
-                        gridPane.add(dataRow, i, rowIndex);
+                        gridPane.add(dataRow, i, rowIndex++);
                     }
-                    ++rowIndex;
+
                 }
                 gridPane.setAlignment(Pos.CENTER);
                 Scene scene = new Scene(gridPane);

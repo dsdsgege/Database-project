@@ -7,7 +7,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import org.hibernate.annotations.processing.SQL;
+
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -152,5 +152,16 @@ public class DashBoardUtils {
             throw new RuntimeException(e);
         }
         return columnNames.toArray(new String[columnNames.size()]);
+    }
+
+    //If there is username in the statement then felhasznalonev = with the logged in user's username
+    public boolean isThereUsername(String columns) {
+        String[] columnsInArray = columns.split(",");
+        for (String column: columnsInArray) {
+            if (column.trim().equals("felhasznalonev")) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane fx:id="gridPane" alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamsportsdb.ui.ComplexQueryController">
+
+
+    <Label fx:id="kettosLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Kettős állampolgárok neveinek lekérdezése" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <Button fx:id="kettosButton" onAction="#onKettosButtonAction" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Lekérdezés indítása" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+    <Label fx:id="meccsekLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Meccsek száma csapatonként" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+    <Button fx:id="meccsekButton" onAction="#onMeccsekButton" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Lekérdezés indítása" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+    <Button fx:id="meccsekExecute" onAction="#onMeccsekExecuteAction" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Futtatás" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+
+
+    <Button fx:id="backButton" onAction="#onBackButtonAction" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Vissza" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+    <Label fx:id="errorMessage" alignment="CENTER" prefHeight="104.0" prefWidth="728.0" style="-fx-text-fill: red; -fx-font-size: 14px; -fx-font-weight: bold;" text=" " visible="false" wrapText="true" GridPane.columnIndex="3" GridPane.columnSpan="2147483647" GridPane.halignment="LEFT" GridPane.rowIndex="11" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" />
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+
+</GridPane>

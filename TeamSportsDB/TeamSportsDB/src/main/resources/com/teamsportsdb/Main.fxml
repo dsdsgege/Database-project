@@ -3,12 +3,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamsportsdb.ui.MainController">
-  <Label fx:id="welcomeText" prefHeight="70.0" prefWidth="380.0" style="-fx-font-size: 20px;" text="Üdvözöllek az adatbázis alkalmazásomban!" textAlignment="CENTER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" />
-  <TextField fx:id="username" promptText="Felhasználónév" style="-fx-font-size: 15px;" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-  <PasswordField fx:id="password" promptText="Jelszó" style="-fx-font-size: 15px;" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-  <Button fx:id="loginButton" defaultButton="true" onAction="#onLoginButtonAction" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px;   -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Bejelentkezés" visible="false" GridPane.rowIndex="3" />
-  <Button fx:id="registration" onAction="#onRegistrationAction" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Még nincs fiókom" textAlignment="CENTER" visible="false" GridPane.columnIndex="3" />
-  <Button fx:id="query" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand; -fx-background-radius: 5px; -fx-padding: 5 15;" text="Irány a lekérdezés" textAlignment="CENTER" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-  <Label fx:id="errorMessage" alignment="CENTER" style="-fx-text-fill: red; -fx-font-size: 14px; -fx-font-weight: bold;" text=" " visible="false" GridPane.rowIndex="14" />
+<GridPane alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamsportsdb.ui.MainController" fx:id="gridPane">
+    <TextField fx:id="username" promptText="Felhasználónév" style="-fx-font-size: 15px;"  GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <PasswordField fx:id="password" promptText="Jelszó" style="-fx-font-size: 15px;"  GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Button fx:id="loginButton" defaultButton="true" onAction="#onLoginButtonAction" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px;   -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Bejelentkezés"  GridPane.rowIndex="3" />
+    <Button fx:id="registration" onAction="#onRegistrationAction" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Még nincs fiókom" textAlignment="CENTER"  GridPane.columnIndex="3" />
+    <Button fx:id="queryButton" onAction="#onQueryButtonAction" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand; -fx-background-radius: 5px; -fx-padding: 5 15;" text="Irány a lekérdezés" textAlignment="CENTER"  GridPane.columnIndex="3" GridPane.rowIndex="1" />
+    <Label fx:id="errorMessage" alignment="CENTER" style="-fx-text-fill: red; -fx-font-size: 14px; -fx-font-weight: bold;" text=" " GridPane.rowIndex="14" />
 </GridPane>
