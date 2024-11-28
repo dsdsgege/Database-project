@@ -29,6 +29,7 @@ public class ConnectController{
 
 
     public void onConnectButtonAction() {
+        errorMessage.setVisible(false);
             String user = username.getText();
             String pass = password.getText();
 

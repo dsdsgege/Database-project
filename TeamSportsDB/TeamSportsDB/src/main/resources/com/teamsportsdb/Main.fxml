@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamsportsdb.ui.MainController" fx:id="gridPane">
+<GridPane alignment="CENTER" hgap="10" style="-fx-padding: 20; -fx-background-color: #f4f4f4;" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamsportsdb.ui.MainController" fx:id="gridPane">
     <TextField fx:id="username" promptText="Felhasználónév" style="-fx-font-size: 15px;"  GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <PasswordField fx:id="password" promptText="Jelszó" style="-fx-font-size: 15px;"  GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <Button fx:id="loginButton" defaultButton="true" onAction="#onLoginButtonAction" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px;   -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Bejelentkezés"  GridPane.rowIndex="3" />

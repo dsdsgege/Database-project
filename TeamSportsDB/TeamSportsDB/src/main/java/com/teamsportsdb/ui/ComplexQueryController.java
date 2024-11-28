@@ -1,5 +1,6 @@
 package com.teamsportsdb.ui;
 
+import com.teamsportsdb.utils.DashBoardUtils;
 import com.teamsportsdb.utils.Database;
 import com.teamsportsdb.utils.SceneManager;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
@@ -29,9 +31,25 @@ public class ComplexQueryController {
     @FXML
     private Button kettosButton, meccsekButton, meccsekExecute;
 
+    @FXML
+    private ChoiceBox<String> firstTeamsChoice;
+
+
     private ArrayList<CheckBox> checkBoxList = new ArrayList<>();
 
+    public void initialize() {
+        errorMessage.setVisible(false);
+        try {
+            String query = "SELECT nev FROM csapat GROUP BY nev";
+            DashBoardUtils.choiceBoxOptions(firstTeamsChoice, query, "nev");
+        } catch (RuntimeException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
+    }
+
     public void onBackButtonAction() {
+        errorMessage.setVisible(false);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/teamsportsdb/Main.fxml"));
         try {
             Scene mainScene = new Scene(fxmlLoader.load(), Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
@@ -43,7 +61,10 @@ public class ComplexQueryController {
     }
 
     public void onKettosButtonAction() {
-        String query = "SELECT nev FROM tag WHERE tag_id IN (SELECT tag_id FROM tag_allampolgarsag GROUP BY tag_id HAVING count(allampolgarsag) > 1)";
+        errorMessage.setVisible(false);
+        String query = "SELECT nev " +
+                "FROM tag " +
+                "WHERE tag_id IN (SELECT tag_id FROM tag_allampolgarsag GROUP BY tag_id HAVING count(allampolgarsag) > 1)";
         try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement(query)) {
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 GridPane gp = new GridPane();
@@ -120,10 +141,15 @@ public class ComplexQueryController {
         String teamsInString = "'";
         teamsInString += String.join("', '",teams);
         teamsInString += "'";
-        String query = "SELECT csapat.nev AS nev, count(merkozik.merkozes_id) AS merkozesek FROM merkozes INNER JOIN merkozik ON merkozes.merkozes_id = merkozik.merkozes_id INNER JOIN csapat ON csapat.csapat_id = merkozik.csapat_id WHERE csapat.nev IN (%s) GROUP BY csapat.nev".formatted(teamsInString);
+        String query = ("SELECT csapat.nev AS nev, count(merkozik.merkozes_id) AS merkozesek " +
+                "FROM merkozes " +
+                "INNER JOIN merkozik ON merkozes.merkozes_id = merkozik.merkozes_id " +
+                "INNER JOIN csapat ON csapat.csapat_id = merkozik.csapat_id " +
+                "WHERE csapat.nev IN (%s) " +
+                "GROUP BY csapat.nev").formatted(teamsInString);
         try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement(query)) {
-            try {
-                ResultSet rs = preparedStatement.executeQuery();
+            try ( ResultSet rs = preparedStatement.executeQuery()) {
+
                 GridPane gp = new GridPane();
                 gp.setHgap(10);
                 gp.setVgap(10);
@@ -155,5 +181,91 @@ public class ComplexQueryController {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
         }
+    }
+
+    public void onTeamsButtonAction() {
+        errorMessage.setVisible(false);
+        String team = firstTeamsChoice.getSelectionModel().getSelectedItem();
+        if(team == null) {
+            errorMessage.setText("Válassz ki csapatot!");
+            errorMessage.setVisible(true);
+            return;
+        }
+
+        String query = "SELECT tag.nev FROM tag WHERE tag.csapat_id = (SELECT csapat_id FROM csapat WHERE nev = '%s') ORDER BY tag.nev LIMIT 3".formatted(team) ;
+        try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement(query)) {
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                GridPane gp = new GridPane();
+                gp.setHgap(10);
+                gp.setVgap(10);
+                gp.setAlignment(Pos.CENTER);
+
+                Label csapat = new Label(team);
+                csapat.setStyle("-fx-border-color:black; -fx-border-width: 2px; -fx-padding: 5px; -fx-font-size: 16px");
+                gp.add(csapat,0,0);
+                int rowIndex = 1;
+                while(rs.next()) {
+                    gp.add(new Label(rs.getString(1)),0,rowIndex++);
+                }
+
+                Stage stage = new Stage();
+                Scene scene = new Scene(gp);
+                stage.setScene(scene);
+                stage.show();
+            } catch (SQLException e) {
+                errorMessage.setText(e.getMessage());
+                errorMessage.setVisible(true);
+            }
+        } catch (SQLException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
+    }
+
+    public void onWonButtonAction() {
+        errorMessage.setVisible(false);
+
+
+        //LEFT JOIN so everything will be included from csapat
+        String query = "SELECT csapat.nev, count(nyertes_id) AS nyert " +
+                "FROM csapat " +
+                "LEFT JOIN merkozes ON csapat.csapat_id = merkozes.nyertes_id " +
+                "GROUP BY csapat.nev " +
+                "ORDER BY count(nyertes_id) DESC;";
+
+
+        try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement(query)) {
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                GridPane gp = new GridPane();
+                gp.setHgap(10);
+                gp.setVgap(10);
+                gp.setAlignment(Pos.CENTER);
+
+                Label teams = new Label("Csapatok");
+                Label won = new Label("Nyert mérkőzések száma");
+                teams.setStyle("-fx-border-color:black; -fx-border-width: 2px; -fx-padding: 5px; -fx-font-size: 16px");
+                won.setStyle("-fx-border-color:black; -fx-border-width: 2px; -fx-padding: 5px; -fx-font-size: 16px");
+                gp.add(teams,0,0);
+                gp.add(won,1,0);
+                int rowIndex = 1;
+                while(rs.next()) {
+                    gp.add(new Label(rs.getString("nev")),0,rowIndex);
+                    gp.add(new Label(rs.getString("nyert")),1,rowIndex++);
+                }
+
+                Stage stage = new Stage();
+                Scene scene = new Scene(gp);
+                stage.setScene(scene);
+                stage.show();
+            } catch (SQLException e) {
+                errorMessage.setText(e.getMessage());
+                errorMessage.setVisible(true);
+            }
+        } catch (SQLException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
+
+
     }
 }

@@ -3,16 +3,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="gridPane" alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamsportsdb.ui.ComplexQueryController">
+<GridPane fx:id="gridPane" style="-fx-padding: 20; -fx-background-color: #f4f4f4;" alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamsportsdb.ui.ComplexQueryController">
 
 
     <Label fx:id="kettosLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Kettős állampolgárok neveinek lekérdezése" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-    <Button fx:id="kettosButton" onAction="#onKettosButtonAction" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Lekérdezés indítása" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <Button fx:id="kettosButton" onAction="#onKettosButtonAction" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Lekérdezés" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
     <Label fx:id="meccsekLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Meccsek száma csapatonként" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-    <Button fx:id="meccsekButton" onAction="#onMeccsekButton" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Lekérdezés indítása" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-    <Button fx:id="meccsekExecute" onAction="#onMeccsekExecuteAction" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Futtatás" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+    <Button fx:id="meccsekButton" onAction="#onMeccsekButton" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Csapatok" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+    <Button fx:id="meccsekExecute" onAction="#onMeccsekExecuteAction" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Lekérdezés" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="10" />
 
+    <Label fx:id="jatekosLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Egy csapat első 3 játékosa a névsorban" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+    <ChoiceBox fx:id="firstTeamsChoice" GridPane.columnIndex="3" GridPane.rowIndex="1"></ChoiceBox>
+    <Button fx:id="teamsButton" onAction="#onTeamsButtonAction"   style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Lekérdezés" GridPane.columnIndex="3" GridPane.rowIndex="2"></Button>
+
+    <Label fx:id="nyertLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Egy csapat hány mérkőzést nyert" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+    <Button fx:id="wonButton" onAction="#onWonButtonAction"   style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Lekérdezés" GridPane.columnIndex="4" GridPane.rowIndex="1"></Button>
 
     <Button fx:id="backButton" onAction="#onBackButtonAction" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5px; -fx-padding: 5 15; -fx-cursor: hand;" text="Vissza" GridPane.columnIndex="0" GridPane.rowIndex="10" />
     <Label fx:id="errorMessage" alignment="CENTER" prefHeight="104.0" prefWidth="728.0" style="-fx-text-fill: red; -fx-font-size: 14px; -fx-font-weight: bold;" text=" " visible="false" wrapText="true" GridPane.columnIndex="3" GridPane.columnSpan="2147483647" GridPane.halignment="LEFT" GridPane.rowIndex="11" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" />

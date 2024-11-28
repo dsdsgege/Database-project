@@ -10,6 +10,9 @@ import javafx.scene.control.*;
 import javafx.stage.Screen;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class RegistrationController {
@@ -28,12 +31,34 @@ public class RegistrationController {
 
 
     public void initialize() {
+        errorMessage.setVisible(false);
         SceneManager.getPrimaryStage().setMaximized(true);
     }
 
     public void onRegButtonAction() {
+        errorMessage.setVisible(false);
         String[] col = {"felhasznalonev", "nev", "jelszo"};
         String[] val = {username.getText(), name.getText(), password.getText()};
+
+        //Check if the username is not occupied
+        try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement("SELECT felhasznalonev FROM felhasznalok")) {
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    if(rs.getString(1).equals(username.getText())) {
+                        errorMessage.setText(username.getText() + " felhasználónév már foglalt!");
+                        return;
+                    }
+                }
+
+            } catch (SQLException e) {
+                errorMessage.setText(e.getMessage());
+                errorMessage.setVisible(true);
+            }
+        } catch (SQLException e) {
+            errorMessage.setText(e.getMessage());
+            errorMessage.setVisible(true);
+        }
+
         try {
             Database.insertRecords("felhasznalo", col, val, "felhasznalonev");
 
