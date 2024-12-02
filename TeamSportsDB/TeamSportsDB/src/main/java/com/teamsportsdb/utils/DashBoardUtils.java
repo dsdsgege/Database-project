@@ -1,12 +1,9 @@
 package com.teamsportsdb.utils;
 
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.scene.Node;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+
 
 
 import java.sql.PreparedStatement;
@@ -86,15 +83,6 @@ public class DashBoardUtils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static boolean isAnyNull( String... strings) {
-        for (String str : strings) {
-            if(str == null) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public static boolean isDatatypeCorrect(String table, String column, String value) throws RuntimeException {

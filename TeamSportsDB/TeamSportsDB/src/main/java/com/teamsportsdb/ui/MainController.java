@@ -3,7 +3,6 @@ package com.teamsportsdb.ui;
 import com.teamsportsdb.utils.Database;
 import com.teamsportsdb.utils.LoginManager;
 import com.teamsportsdb.utils.SceneManager;
-import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
-import javafx.util.Duration;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,12 +45,19 @@ public class MainController {
 
     public void onLoginButtonAction() throws SQLException {
         errorMessage.setVisible(false);
+        if(username.getText().isEmpty() || password.getText().isEmpty()) {
+            errorMessage.setText("Minden mezőt ki kell tölteni!");
+            errorMessage.setVisible(true);
+            return;
+        }
+
             ResultSet resultSet = null;
             try {
                 resultSet = Database.executeQuery("SELECT felhasznalonev, jelszo,nev FROM felhasznalo");
             } catch (RuntimeException e) {
                 errorMessage.setText(e.getMessage());
                 errorMessage.setVisible(true);
+                return;
             }
 
             while(resultSet.next()) {
@@ -83,15 +88,20 @@ public class MainController {
                         } else {
                             errorMessage.setText("Helytelen jelszó!");
                             errorMessage.setVisible(true);
+                            return;
                         }
                     }
-                } catch (SQLException e) {
+                } catch (SQLException | IOException e) {
                     errorMessage.setText(e.getMessage());
                     errorMessage.setVisible(true);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    return;
                 }
-
+            }
+            try {
+                resultSet.close();
+            } catch (Exception e) {
+                errorMessage.setText(e.getMessage());
+                errorMessage.setVisible(true);
             }
     }
 

@@ -37,26 +37,34 @@ public class RegistrationController {
 
     public void onRegButtonAction() {
         errorMessage.setVisible(false);
+
+        if(username.getText().isEmpty() || name.getText().isEmpty() || password.getText().isEmpty()) {
+            errorMessage.setText("Minden mezőt ki kell tölteni");
+            errorMessage.setVisible(true);
+            return;
+        }
         String[] col = {"felhasznalonev", "nev", "jelszo"};
         String[] val = {username.getText(), name.getText(), password.getText()};
 
         //Check if the username is not occupied
-        try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement("SELECT felhasznalonev FROM felhasznalok")) {
+        try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement("SELECT felhasznalonev FROM felhasznalo")) {
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 while (rs.next()) {
                     if(rs.getString(1).equals(username.getText())) {
                         errorMessage.setText(username.getText() + " felhasználónév már foglalt!");
+                        errorMessage.setVisible(true);
                         return;
                     }
                 }
-
             } catch (SQLException e) {
                 errorMessage.setText(e.getMessage());
                 errorMessage.setVisible(true);
+                return;
             }
         } catch (SQLException e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
+            return;
         }
 
         try {
@@ -69,12 +77,13 @@ public class RegistrationController {
 
             //Switching the scene to the user dashboard where the users can manipulate data
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/teamsportsdb/UserDashBoard.fxml"));
-            Scene userDashBoardScene = new Scene(fxmlLoader.load());
+            Scene userDashBoardScene = new Scene(fxmlLoader.load(),Screen.getPrimary().getBounds().getWidth(), Screen.getPrimary().getBounds().getHeight());
             SceneManager.getPrimaryStage().setScene(userDashBoardScene);
             //SceneManager.getPrimaryStage().setFullScreen(true);
         } catch (Exception e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
+
         }
     }
 

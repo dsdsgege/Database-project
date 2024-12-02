@@ -53,6 +53,7 @@ public class UserDashBoardController {
             } catch (IOException e) {
                 errorMessage.setText(e.getMessage());
                 errorMessage.setVisible(true);
+                return;
             }
         }
         loggedInLabel.setStyle("-fx-font-size: 16px;");
@@ -98,6 +99,7 @@ public class UserDashBoardController {
         } catch (Exception e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
+            return;
         }
 
 
@@ -107,6 +109,7 @@ public class UserDashBoardController {
         } catch (RuntimeException e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
+            return;
         }
 
         //Getting the data from the tableChoice, also setting the options for columns
@@ -127,6 +130,7 @@ public class UserDashBoardController {
 
     //If Futtatés is clicked
     public void onQueryExecuteAction() {
+        errorMessage.setVisible(false);
         //getting the datas
         String table = tableChoice.getSelectionModel().getSelectedItem();
         String columns = columnsField.getText();
@@ -135,9 +139,10 @@ public class UserDashBoardController {
         String value = valueField.getText();
 
         //Checking if table and columns has been set
-        if(table == null || columns == null ) {
+        if(table == null || columns.isEmpty() ) {
             errorMessage.setText("A táblát és oszlopokat kötelező megadni!");
             errorMessage.setVisible(true);
+            return;
         }
 
         //Getting the logical operator of logicChoice
@@ -159,7 +164,7 @@ public class UserDashBoardController {
         //executin with prepared statement
         String[] columnsArray = null;
         try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement(query)) {
-            if(whereColumns != null && logic != null && value != null)
+            if(whereColumns != null && logic != null && !value.isEmpty())
                 preparedStatement.setString(1, value);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -190,8 +195,9 @@ public class UserDashBoardController {
                         Label dataRow = new Label(resultSet.getString(trimmedColumn));
                         dataRow.setStyle("-fx-border-color:grey; -fx-border-width: 1px; -fx-padding: 2px;");
                         gridPane.add(firstRow, i, 0);
-                        gridPane.add(dataRow, i, rowIndex++);
+                        gridPane.add(dataRow, i, rowIndex);
                     }
+                    ++rowIndex;
 
                 }
                 gridPane.setAlignment(Pos.CENTER);
@@ -199,7 +205,7 @@ public class UserDashBoardController {
                 Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.show();
-                errorMessage.setVisible(false);
+
             }
         } catch (SQLException e) {
             errorMessage.setText(e.getMessage());
@@ -222,6 +228,7 @@ public class UserDashBoardController {
         } catch (RuntimeException e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
+            return;
         }
 
         //Getting the table options for the choicebox
@@ -230,17 +237,19 @@ public class UserDashBoardController {
         } catch (RuntimeException e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
+
         }
     }
 
     //Futtatás when Új adat is clicked
     public void onInsertExecuteAction() {
+        errorMessage.setVisible(false);
         //Making variables of the given datas
         String table = tableChoice.getSelectionModel().getSelectedItem();
         String columns = columnsField.getText();
         String values = updateField.getText();
 
-        if(table == null || values == null){
+        if(table == null || values.isEmpty()){
             errorMessage.setText("A tábla és adatok kitöltése kötelező!");
             errorMessage.setVisible(true);
             return;
@@ -294,6 +303,7 @@ public class UserDashBoardController {
         } catch (RuntimeException e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
+            return;
         }
 
         //Setting the options for the tables
@@ -302,6 +312,7 @@ public class UserDashBoardController {
         } catch (RuntimeException e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
+            return;
         }
 
         //Setting the options for the tableChoice
@@ -323,6 +334,7 @@ public class UserDashBoardController {
 
 
     public void onUpdateExecuteAction() {
+        errorMessage.setVisible(false);
         //Getting the datas from the nodes
         String table = tableChoice.getSelectionModel().getSelectedItem();
         String columns = columnsField.getText();
@@ -331,10 +343,11 @@ public class UserDashBoardController {
         String logic = logicChoice.getSelectionModel().getSelectedItem();
         String value = valueField.getText();
 
-        //checking if theyre nulls
-        if(DashBoardUtils.isAnyNull(table,columns,updateValues)) {
+        //checking if theyre nulls/empty
+        if(table == null || columns.isEmpty() || updateValues.isEmpty()) {
             errorMessage.setText("Minden mezőt kötelező kitölteni, a szűrésen kívül");
             errorMessage.setVisible(true);
+            return;
         }
 
         String[] columnsArray = columns.split(",");
@@ -348,6 +361,7 @@ public class UserDashBoardController {
                 errorMessage.setText("Ez így nem jó!\t" +
                         "Az oszlopok száma nem egyenlő az értékek számával...");
                 errorMessage.setVisible(true);
+                return;
             }
         }
 
@@ -375,7 +389,6 @@ public class UserDashBoardController {
                 } else {
                     preparedStatement.setString(2, "");
                 }
-
                     //execute the update
                     preparedStatement.executeUpdate();
                     errorMessage.setVisible(false);
@@ -431,19 +444,26 @@ public class UserDashBoardController {
     public void onDeleteExecuteAction() {
         String table = tableChoice.getSelectionModel().getSelectedItem();
         String whereColumn = columnsChoice.getSelectionModel().getSelectedItem();
-        String logic = DashBoardUtils.getLogicalOperator(logicChoice.getSelectionModel().getSelectedItem());
+
+        String logic = logicChoice.getSelectionModel().getSelectedItem();
         String value= valueField.getText();
 
         if(table == null) {
             errorMessage.setText("Legalább a táblát meg kell adni!");
             errorMessage.setVisible(true);
+
             return;
         }
 
         String query = "DELETE FROM %s".formatted(table);
 
-        if(whereColumn != null && logic != null && value != null) {
+        if(whereColumn != null && logic != null && !value.isEmpty()) {
+            logic = DashBoardUtils.getLogicalOperator(logic);
             query += " WHERE %s %s ?".formatted(whereColumn,logic);
+        }
+        else {
+            errorMessage.setText("Figyelem, szűrés nélküli törlés!");
+            errorMessage.setVisible(true);
         }
 
         try (PreparedStatement preparedStatement = Database.getConnection().prepareStatement(query)) {
@@ -461,7 +481,6 @@ public class UserDashBoardController {
             }
 
             preparedStatement.executeUpdate();
-            errorMessage.setVisible(false);
         } catch (SQLException e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);

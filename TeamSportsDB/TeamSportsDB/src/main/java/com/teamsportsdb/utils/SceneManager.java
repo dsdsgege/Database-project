@@ -1,8 +1,5 @@
 package com.teamsportsdb.utils;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class SceneManager {

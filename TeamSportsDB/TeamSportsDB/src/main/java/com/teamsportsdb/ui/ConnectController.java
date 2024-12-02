@@ -1,6 +1,5 @@
 package com.teamsportsdb.ui;
 
-import com.teamsportsdb.MainApplication;
 import com.teamsportsdb.utils.Database;
 import com.teamsportsdb.utils.SceneManager;
 import javafx.animation.PauseTransition;

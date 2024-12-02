@@ -1,9 +1,5 @@
 package com.teamsportsdb.utils;
 
-
-
-
-
 import java.sql.*;
 import java.util.Arrays;
 

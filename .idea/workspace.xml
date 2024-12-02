@@ -6,14 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="72015872-dc7e-40a2-9abf-f97eba7a0f36" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/E-K.PNG" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/ComplexQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/ComplexQueryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/ConnectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/ConnectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/RegistrationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/ComplexQuery.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/ComplexQuery.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/Connect.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/Connect.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/UserDashBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/ui/UserDashBoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/utils/DashBoardUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/utils/DashBoardUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/utils/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/utils/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/utils/SceneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/java/com/teamsportsdb/utils/SceneManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/Registration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/Registration.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/UserDashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/TeamSportsDB/TeamSportsDB/src/main/resources/com/teamsportsdb/UserDashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tervezesi_dokumentacio (Automatikusan helyreállítva).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/teamsports.sql" beforeDir="false" afterPath="$PROJECT_DIR$/teamsports.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/~$rvezesi_dokumentacio (Automatikusan helyreállítva).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/~WRL0236.tmp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,24 +52,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/Documents/GitHub/Database-project/mysql-connector-j-9.1.0/mysql-connector-j-9.1.0.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.21875&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.45682102&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MainApplication.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Admin/Desktop/adatb",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.21875",
+    "project.structure.side.proportion": "0.45682102",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

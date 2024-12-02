@@ -48,6 +48,8 @@ public class ComplexQueryController {
         }
     }
 
+    //Button that navigates back to Main.fxml
+
     public void onBackButtonAction() {
         errorMessage.setVisible(false);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/teamsportsdb/Main.fxml"));
@@ -57,9 +59,11 @@ public class ComplexQueryController {
         } catch (IOException e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
+
         }
     }
 
+    //Button to get multinational people from database
     public void onKettosButtonAction() {
         errorMessage.setVisible(false);
         String query = "SELECT nev " +
@@ -116,6 +120,8 @@ public class ComplexQueryController {
         }
     }
 
+
+    //Button to get matches grouped by teams
     public void onMeccsekExecuteAction() {
         ArrayList<String> teams = new ArrayList<>();
         errorMessage.setVisible(false);
@@ -174,7 +180,7 @@ public class ComplexQueryController {
                 newStage.setScene(newScene);
                 newStage.show();
             } catch (SQLException e) {
-                errorMessage.setText(e.getMessage() + teamsInString);
+                errorMessage.setText(e.getMessage());
                 errorMessage.setVisible(true);
             }
         } catch (SQLException e) {
@@ -183,6 +189,8 @@ public class ComplexQueryController {
         }
     }
 
+
+    //Button to get the first 3 (alphabetically) players of a team
     public void onTeamsButtonAction() {
         errorMessage.setVisible(false);
         String team = firstTeamsChoice.getSelectionModel().getSelectedItem();
@@ -222,6 +230,8 @@ public class ComplexQueryController {
         }
     }
 
+
+    //Button to get how many won matches a team have
     public void onWonButtonAction() {
         errorMessage.setVisible(false);
 
@@ -260,12 +270,11 @@ public class ComplexQueryController {
             } catch (SQLException e) {
                 errorMessage.setText(e.getMessage());
                 errorMessage.setVisible(true);
+
             }
         } catch (SQLException e) {
             errorMessage.setText(e.getMessage());
             errorMessage.setVisible(true);
         }
-
-
     }
 }
